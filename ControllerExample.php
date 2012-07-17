@@ -3,7 +3,7 @@
 //omitting setting exception mode, don't forget it!
 $db = new PDO(...);
 $authorDao = new AuthorDao($db);
-$authorService = new AuthorService($authorDao);
+$authorService = new AuthorServiceDaoImpl($authorDao);
 
 $authorService->getBooks($author->getPrimaryKey());
 

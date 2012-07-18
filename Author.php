@@ -1,5 +1,5 @@
 <?php
-class Author extends Entity {
+class Author {
    public $name;
    public $penNames;
 }

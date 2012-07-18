@@ -10,7 +10,7 @@
 //          binary or object form, etc.) must not be linked to software that is
 //          released with a license that requires disclosure of source code
 //          (ex: the GPL).
-	//       6.Redistributions of source code must be licensed under more than one
+//       6.Redistributions of source code must be licensed under more than one
 //          license and must not have the terms of the OSSAL removed.
 //   * See http://people.freebsd.org/~seanc/ossal/ for complete details.
 //

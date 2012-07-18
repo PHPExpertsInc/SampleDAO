@@ -25,49 +25,37 @@
 //             PHPExperts.pro (www.phpexperts.pro).", wherever you list contributors.
 //   * See http://creativecommons.org/licenses/by/3.0/us/ for complete details.
 
-interface DAL_Driver
+class AuthorManager
 {
-	public function getPrimaryActor();
+	/** @var \DataAccessLayer */
+	protected $dal;
 
-	public function add($namespace, $key, $value);
-	public function get($namespace, $key);
-	public function update($namespace, $key, $value);
-	public function delete($namespace, $key);
-}
-
-// Uses the Composite design pattern.
-class DataAccessLayer implements DAL_Driver
-{
-	/** @var DAL_Driver */
-	protected $driver;
-
-	public function __construct(DAL_Driver $driver)
+	public function __construct(DataAccessLayer $dal)
 	{
-		$this->driver = $driver;
+		$this->dal = $dal;
 	}
 
-	public function getPrimaryActor()
+	public function add($name, array $penNames)
 	{
-		return $this->driver->getPrimaryActor();
+		$author = new Author;
+		$author->name = $name;
+		$author->penNames = $penNames;
+
+		$this->dal->add('authors', 'name=' . $name, $author);
 	}
 
-	public function add($namespace, $key, $value)
+	public function get($name)
 	{
-		return $this->driver->add($namespace, $key, $value);
+		$this->dal->get('authors', 'name=' . $name);
 	}
 
-	public function get($namespace, $key)
+	public function update(Author $author)
 	{
-		return $this->driver->get($namespace, $key);
+		$this->dal->update('authors', 'name=' . $author->name, $author);
 	}
 
-	public function update($namespace, $key, $value)
+	public function delete($name)
 	{
-		return $this->driver->update($namespace, $key, $value);
-	}
-
-	public function delete($namespace, $key)
-	{
-		return $this->driver->delete($namespace, $key);
+		$this->dal->delete('authors', 'name=' . $name);
 	}
 }
